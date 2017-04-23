@@ -67,9 +67,6 @@ namespace Caveman.UI
             joystick.FingerLiftedEvent += controller => model.HandlerOnStopMove();
             respawnWindow.ButtonRespawn.onClick.AddListener(delegate
             {
-                // TODO: set count gold respawn received from server
-                //if (!playerModelBase.SpendGold(0))
-                //   return;
 	            model.PlayerCore.IsAlive = true;
                 model.StopAllCoroutines();
                 model.RespawnInstantly(randomPosition());
