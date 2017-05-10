@@ -14,7 +14,9 @@ namespace Caveman.UI.Menu
         [SerializeField] private CanvasGroup tooltipNickname;
         [SerializeField] private InputField inputNickname;
         [SerializeField] private Text metaServerIp;
-
+       
+        [SerializeField] private AudioSource audioMusic;
+       
         public void Start()
         {
             Screen.orientation = ScreenOrientation.Landscape;
@@ -31,11 +33,18 @@ namespace Caveman.UI.Menu
             if (string.IsNullOrEmpty(inputNickname.text))
             {
                 ShowNoNameAlert();
-            } 
+            }
             else
             {
-                LoadingScreen.instance.ProgressTo(1);
+                StartCoroutine(LoadLevelWithAudio());
             }
+        }
+
+        private IEnumerator LoadLevelWithAudio()
+        {
+            audioMusic.Play();
+            yield return new WaitForSeconds(0.3f);
+            LoadingScreen.instance.ProgressTo(1);
         }
 
         [UsedImplicitly]
